@@ -4,7 +4,8 @@ build: ## Build docker image locally
 
 .PHONY: up
 up: ## Bring up a container name "jupyterlab"
-	docker run --name jupyterlab -v $(PWD)/src:/app -d -p 8888:8888 $$(whoami)/jupyterlab:latest jupyter lab
+	docker rm -f jupyterlab
+	docker run --name jupyterlab -v $(PWD)/src:/app -d -p 8888:8888 $$(whoami)/jupyterlab jupyter lab
 
 .PHONY: tag
 tag: ## Tag docker before pushing to private repo
