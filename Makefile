@@ -1,19 +1,17 @@
+whoami=ekka21
+
 .PHONY: build
 build: ## Build docker image locally
-	docker build -t $$(whoami)/jupyterlab:latest .
+	docker build -t $(whoami)/jupyterlab:latest .
 
 .PHONY: up
 up: ## Bring up a container name "jupyterlab"
 	docker rm -f jupyterlab
-	docker run --name jupyterlab -v $(PWD)/src:/app -d -p 8888:8888 $$(whoami)/jupyterlab jupyter lab
-
-.PHONY: tag
-tag: ## Tag docker before pushing to private repo
-	docker tag SRC DEST
+	docker run --name jupyterlab -v $(PWD)/src:/app -d -p 8888:8888 $whoami/jupyterlab jupyter lab
 
 .PHONY: push
 push: ## Push a docker image to remote repo
-	docker push private repo
+	docker push $(whoami)/jupyterlab:latest
 
 .PHONY: log
 log: ## Log running container
